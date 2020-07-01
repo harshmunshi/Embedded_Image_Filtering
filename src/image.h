@@ -15,22 +15,35 @@ The header confirms if the file is actually a BMP of something else. The DIB hea
 the size of the image including rows and columns
 ****************************************************************************************************************/
 
-struct BMPheader{
+typedef struct BMPheader{
     uint16_t file_type{0x4D42};
     uint32_t file_size{ 0 }; // size of the file (54 bytes header + 16 bytes data)
     uint16_t reserved1{ 0 }; // not used
     uint16_t reserved2{ 0 }; // not used
     uint32_t offset{ 0 }; // start position
-};
+} BMPheader;
 
-struct DIBheader{
-    uint32_t size{ 0 };
+typedef struct DIBheader{
+    uint32_t size{ 0 }; 
     int32_t width{ 0 };
     int32_t height{ 0 };
     uint16_t cplanes{ 1 };
+    uint16_t bits_per_pixel{ 0 };
+    uint32_t compression{ 0 };
+    uint32_t image_size{ 0 };
+    uint32_t x_pixel_per_m{ 0 };
+    uint32_t y_pixel_per_m{ 0 };
+    uint32_t num_colors{ 0 };
+    uint32_t imp_colors{ 0 };
+} DIBheader;
 
-};
-
-
+typedef struct BMPData {
+    uint32_t red{0x00ff0000};
+    uint32_t green{0x0000ff00};
+    uint32_t blue{0x000000ff};
+    uint32_t alpha{0xff000000};
+    uint32_t color_sapce{0x73524742}; //sRGB
+    uint32_t unused[16]{ 0 };
+} BMPData;
 
 #endif
