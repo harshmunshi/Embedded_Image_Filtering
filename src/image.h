@@ -2,19 +2,31 @@
 #define _IMAGE_H
 
 #include <iostream>
+#include <string>
+#include <vector>
 using namespace std;
 
-/***************************************************************************************************************
-BMP file format
-Example reader is given in https://en.wikipedia.org/wiki/BMP_file_format#DIB_header_(bitmap_information_header)
-The information in BMP header consists of:
-    - A BMP header
-    - A DIB header
-    - Pixel data
-The header confirms if the file is actually a BMP of something else. The DIB header gives more information on
-the size of the image including rows and columns
-****************************************************************************************************************/
+//---------------------------------------------------------------------
+/**
+ * A pixel in a color image is represented by it's red blue and green 
+ * primary colors / pixel values.
+ **/
+ //--------------------------------------------------------------------
 
+class Pixel
+{
+    uint8_t red, blue, green;
+    Pixel() : red(0), blue(0), green(0) { }; //default constructor with no args
+    Pixel(uint8_t r, uint8_t b, uint8_t g) : red(r), blue(b), green(g) { }; //input constructor with r,g,b as inputs  
+}
+
+//----------------------------------------------------------------------
+// define a matrix element which which is of the shape width * height
+typedef vector<vector<Pixel>> Mat;
+
+
+//----------------------------------------------------------------------
+// define BMP reader protocols for image reading. Identify the contents
 typedef struct BMPheader{
     uint16_t file_type{0x4D42};
     uint32_t file_size{ 0 }; // size of the file (54 bytes header + 16 bytes data)
@@ -45,5 +57,11 @@ typedef struct BMPData {
     uint32_t color_sapce{0x73524742}; //sRGB
     uint32_t unused[16]{ 0 };
 } BMPData;
+
+typedef struct JFIFHeader {
+    uint16_t SOI {0xFFD8}; //start of image at a given address
+    uint16_t APP0 {0}; // Application use marker
+
+} JFIFHead;
 
 #endif
