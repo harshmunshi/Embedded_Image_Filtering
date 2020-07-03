@@ -58,10 +58,26 @@ typedef struct BMPData {
     uint32_t unused[16]{ 0 };
 } BMPData;
 
-typedef struct JFIFHeader {
-    uint16_t SOI {0xFFD8}; //start of image at a given address
-    uint16_t APP0 {0}; // Application use marker
+//-------------------------------------------------------------------
+// Header for png files in the simplest possible form, will overload
+// the read and write functions
 
-} JFIFHead;
+typedef struct PNGHeader{
+    uint64_t file_type {89504e470d0a1a0a};
+    uint32_t length {0};
+} PNGHead;
+
+typedef struct IMAGEheader {
+    uint32_t width{ 0 };
+    uint32_t height{ 0 };
+    uint8_t bit_depth{ 0 };
+    uint8_t colot_type{ 0 };
+    uint8_t compression_method{ 0 };
+    uint8_t filter_method{ 0 };
+    uint8_t interlace_method{ 0 };
+} IHDR;
+
+
+
 
 #endif
