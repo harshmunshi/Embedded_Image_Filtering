@@ -17,7 +17,7 @@ class Pixel
     uint8_t red, blue, green;
     Pixel() : red(0), blue(0), green(0) { }; //default constructor with no args
     Pixel(uint8_t r, uint8_t b, uint8_t g) : red(r), blue(b), green(g) { }; //input constructor with r,g,b as inputs  
-}
+};
 
 //----------------------------------------------------------------------
 // define a matrix element which which is of the shape width * height
@@ -65,5 +65,6 @@ class Image
          *  Use the structure to locate the data
          **/
         Mat open(string);
-        
-}
+};
+
+#endif
