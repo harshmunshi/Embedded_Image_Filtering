@@ -71,13 +71,21 @@ typedef struct IMAGEheader {
     uint32_t width{ 0 };
     uint32_t height{ 0 };
     uint8_t bit_depth{ 0 };
-    uint8_t colot_type{ 0 };
+    uint8_t colot_type{ 2 }; //by default it is R,G,B input
     uint8_t compression_method{ 0 };
     uint8_t filter_method{ 0 };
     uint8_t interlace_method{ 0 };
 } IHDR;
 
-
+//----------------------------------------------------------------------
+/** NOTE: color_type can be 0,2,3,4,6.
+    0: Grayscale
+    2: R,G,B
+    3: Palette index, PLTE chunk to follow
+    4: Grayscale + alpha
+    6: RGB + alpha
+**/
+//----------------------------------------------------------------------
 
 
 #endif
