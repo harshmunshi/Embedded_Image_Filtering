@@ -1,5 +1,5 @@
-#ifndef _IMAGEJPG_H
-#define _IMAGEJPG_H
+#ifndef IMAGEJPG_H
+#define IMAGEJPG_H
 
 #include <vector>
 #include <iostream>
@@ -23,36 +23,7 @@ class Pixel
 // define a matrix element which which is of the shape width * height
 typedef vector<vector<Pixel>> Mat;
 
-//---------------------------------------------
-/* Writing the "informal" header for jpeg files
-   A jpeg file consists of the following things:
-   * SOI (start of image): FF D8 //16 bits
-*/
-//----------------------------------------------
 
-
-//----------------------------------------------
-/* The JFIF APP0 marker consists of information 
-   regarding the properties of the data, width,
-   height, pixel densities and the actual data.
-
-*/
-//----------------------------------------------
-
-typedef struct JFIFHeader {
-    uint16_t SOI {0xFFD8};
-    uint16_t APP0 {0xFFE0};
-    uint16_t length {0};
-    uint8_t Identifier[5]; //"JFIF"
-    uint16_t Version;
-    uint8_t Units;
-    uint16_t Xdensity;
-    uint16_t Ydensity;
-    uint8_t Xthumbnail;
-    uint8_t Ythumbnail;
-} JFIFHead;
-
-// The image size = xthumbnail * ythumbnail. Each cross-section will have 3 values
 
 class Image
 {
@@ -64,7 +35,8 @@ class Image
          *  output is a Mat element
          *  Use the structure to locate the data
          **/
-        Mat open(string);
+        
+        void open(string);
 };
 
 #endif
